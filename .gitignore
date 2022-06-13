@@ -1,0 +1,8 @@
+data/*
+images/*
+cogs/core_functions
+keep_alive.py
+temp/*
+__pycache__
+cogs/__pycache__
+core_functions/__pycache__
