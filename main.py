@@ -4,8 +4,8 @@ from disnake.ext import commands
 
 bot = commands.InteractionBot(sync_commands_debug=True)
 
-bot.invite_url = ''
-bot.server_url = ''
+bot.invite_url = 'https://discord.com/api/oauth2/authorize?client_id=774679887101427713&permissions=8&scope=bot'
+bot.server_url = 'https://discord.gg/UPtQtvk'
 
 @bot.event
 async def on_ready():
