@@ -1,3 +1,5 @@
+import os
+
 import disnake
 from disnake.ext import commands
 import qrcode
@@ -70,8 +72,8 @@ class Utility(commands.Cog):
             querystring = {"pageNumber": "1", "pageSize": "10", "q": f"{search}", "autoCorrect": "true"}
 
             headers = {
-                'x-rapidapi-key': "02118c70d0mshf019f7d35ffbca1p124ad0jsnfca7236a85d6",
-                'x-rapidapi-host': "contextualwebsearch-websearch-v1.p.rapidapi.com"
+                'x-rapidapi-key': os.getenv('image_rapidapi_key'),
+                'x-rapidapi-host': os.getenv('image_rapidapi_host')
             }
 
             response = requests.request("GET", url, headers=headers, params=querystring)
