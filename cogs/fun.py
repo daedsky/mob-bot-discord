@@ -21,6 +21,12 @@ class Fun(commands.Cog):
         return img_url
 
     @commands.slash_command()
+    async def captcha(self, ctx, text):
+        """generate a captcha using your text"""
+        await ImageFunctions.captcha(text, 'images/captcha.png')
+        await ctx.send(file=disnake.File('images/captcha.png'))
+
+    @commands.slash_command()
     async def sketch(self, ctx, usr_or_img_url):
         """Sketch image without colors"""
         await core_functions.think(ctx)
