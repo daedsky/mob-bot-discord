@@ -37,5 +37,7 @@ async def is_subreddit_nsfw(subreddit):
     subreddit = await reddit.subreddit(subreddit)
     await subreddit.load()
     if subreddit.over18:
+        await reddit.close()
         return True
+    await reddit.close()
     return False

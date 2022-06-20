@@ -201,8 +201,9 @@ class Fun(commands.Cog):
                                                                     color=self.randomcolor()))
 
     @commands.slash_command()
-    async def meme(self, ctx, amount: int = 1, subreddit='meme'):
+    async def meme(self, ctx, amount: int = 1, subreddit='memes'):
         """Get some memes"""
+        await core_functions.think(ctx)
         subreddit_is_nsfw = await core_functions.is_subreddit_nsfw(subreddit)
         if subreddit_is_nsfw and not ctx.channel.is_nsfw():
             await ctx.edit_original_message('', embed=disnake.Embed(
