@@ -27,6 +27,12 @@ class Fun(commands.Cog):
         await ctx.send(file=disnake.File('images/captcha.png'))
 
     @commands.slash_command()
+    async def did_you_mean(self, ctx, search_text, suggestion_text):
+        """generate a google search did you mean? image"""
+        await ImageFunctions.did_you_mean(search_text, suggestion_text, 'images/did_you_mean.png')
+        await ctx.send(file=disnake.File('images/did_you_mean.png'))
+
+    @commands.slash_command()
     async def sketch(self, ctx, usr_or_img_url):
         """Sketch image without colors"""
         await core_functions.think(ctx)
