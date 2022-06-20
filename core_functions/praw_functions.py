@@ -1,5 +1,3 @@
-import asyncio
-
 import asyncpraw
 import os
 import random
@@ -27,6 +25,7 @@ async def fetch_post(subreddit: str, amount: int):
 
     await reddit.close()
     return posts
+
 
 async def is_subreddit_nsfw(subreddit):
     reddit = asyncpraw.Reddit(client_id=os.getenv('praw_client_id'),  # praw client id
