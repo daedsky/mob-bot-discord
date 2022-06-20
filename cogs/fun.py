@@ -22,15 +22,25 @@ class Fun(commands.Cog):
 
     @commands.slash_command()
     async def captcha(self, ctx, text):
-        """generate a captcha using your text"""
+        """Generate a captcha using your text"""
         await ImageFunctions.captcha(text, 'images/captcha.png')
         await ctx.send(file=disnake.File('images/captcha.png'))
 
     @commands.slash_command()
     async def did_you_mean(self, ctx, search_text, suggestion_text):
-        """generate a google search did you mean? image"""
+        """Generate a google search did you mean? image"""
         await ImageFunctions.did_you_mean(search_text, suggestion_text, 'images/did_you_mean.png')
         await ctx.send(file=disnake.File('images/did_you_mean.png'))
+
+    @commands.slash_command()
+    async def fact(self, ctx, text):
+        """Create a facts meme"""
+        await ImageFunctions.fact(text, 'images/fact.png')
+        embed = disnake.Embed(title='Facts', color=self.randomcolor())
+        embed.set_image('attachment://fact.png')
+        embed.set_footer(text=f"Rendered by {ctx.author}")
+        file = disnake.File("images/pencil_output.png", filename="sketch.png")
+        await ctx.send(embed=embed, file=file)
 
     @commands.slash_command()
     async def sketch(self, ctx, usr_or_img_url):
