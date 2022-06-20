@@ -67,6 +67,7 @@ class Fun(commands.Cog):
 
     @commands.slash_command()
     async def communist(self, ctx, usr_or_img_url):
+        """Communistify the image"""
         await core_functions.think(ctx)
         try:
             img_url = await self.get_img_url(ctx, usr_or_img_url)
@@ -86,6 +87,11 @@ class Fun(commands.Cog):
             await ctx.edit_original_message('',
                                             embed=disnake.Embed(description='Invalid image url',
                                                                 color=self.randomcolor()))
+
+    @commands.slash_command()
+    async def phub(self, ctx, part1, part2):
+        await ImageFunctions.phub(part1, part2, 'images/phub.png')
+        await ctx.send(file=disnake.File('images/phub.png'))
 
     @commands.slash_command()
     async def sketch(self, ctx, usr_or_img_url):
