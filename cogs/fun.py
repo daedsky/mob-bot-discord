@@ -90,8 +90,15 @@ class Fun(commands.Cog):
 
     @commands.slash_command()
     async def phub(self, ctx, part1, part2):
+        """Generate a phub themed text image"""
         await ImageFunctions.phub(part1, part2, 'images/phub.png')
         await ctx.send(file=disnake.File('images/phub.png'))
+
+    @commands.slash_command()
+    async def supreme(self, ctx, text):
+        """Generate a supreme themed text image"""
+        await ImageFunctions.supreme(text, 'images/supreme.png')
+        await ctx.send(file=disnake.File('images/supreme.png'))
 
     @commands.slash_command()
     async def sketch(self, ctx, usr_or_img_url):
