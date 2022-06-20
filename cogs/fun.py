@@ -101,6 +101,16 @@ class Fun(commands.Cog):
         await ctx.send(file=disnake.File('images/supreme.png'))
 
     @commands.slash_command()
+    async def water_meme(self, ctx, text):
+        """Genereate a water meme"""
+        await ImageFunctions.water_meme(text, 'images/water_meme.png')
+        embed = disnake.Embed(title='Water meme', color=self.randomcolor())
+        embed.set_image('attachment://water_meme.png')
+        embed.set_footer(text=f'Rendered by {ctx.author}')
+        file = disnake.File('images/water_meme.png', filename='water_meme.png')
+        await ctx.send(embed=embed, file=file)
+
+    @commands.slash_command()
     async def sketch(self, ctx, usr_or_img_url):
         """Sketch image without colors"""
         await core_functions.think(ctx)
