@@ -111,6 +111,29 @@ class Fun(commands.Cog):
         await ctx.send(embed=embed, file=file)
 
     @commands.slash_command()
+    async def joke_over_head(self, ctx, usr_or_img_url):
+        """Generate a joke over head meme"""
+        await core_functions.think(ctx)
+        try:
+            img_url = await self.get_img_url(ctx, usr_or_img_url)
+            r = requests.get(img_url)
+            with open("images/joh_avatar.png", "wb") as f:
+                f.write(r.content)
+
+            await ImageFunctions.pencil("images/joh_avatar.png", 'images/joh_output.png')
+
+            embed = disnake.Embed(title="Joke over head", color=self.randomcolor())
+            embed.set_image(url="attachment://joh.png")
+            embed.set_footer(text=f"Rendered by {ctx.author}")
+            file = disnake.File("images/joh_output.png", filename="joh.png")
+            await ctx.edit_original_message('', embed=embed, file=file)
+
+        except requests.RequestException:
+            await ctx.edit_original_message('',
+                                            embed=disnake.Embed(description='Invalid image url',
+                                                                color=self.randomcolor()))
+
+    @commands.slash_command()
     async def sketch(self, ctx, usr_or_img_url):
         """Sketch image without colors"""
         await core_functions.think(ctx)
