@@ -49,10 +49,10 @@ class Fun(commands.Cog):
         try:
             img_url = await self.get_img_url(ctx, usr_or_img_url)
             r = requests.get(img_url)
-            with open("images/gay.png", "wb") as f:
+            with open("images/gay_avatar.png", "wb") as f:
                 f.write(r.content)
 
-            await ImageFunctions.pencil("images/gay.png", 'images/gay_output.png')
+            await ImageFunctions.pencil("images/gay_avatar.png", 'images/gay_output.png')
 
             embed = disnake.Embed(title="Gay", color=self.randomcolor())
             embed.set_image(url="attachment://gay.png")
@@ -64,6 +64,29 @@ class Fun(commands.Cog):
             await ctx.edit_original_message('',
                                             embed=disnake.Embed(description='Invalid image url',
                                                                 color=self.randomcolor()))
+
+    @commands.slash_command()
+    async def communist(self, ctx, usr_or_img_url):
+        await core_functions.think(ctx)
+        try:
+            img_url = await self.get_img_url(ctx, usr_or_img_url)
+            r = requests.get(img_url)
+            with open("images/communist_avatar.png", "wb") as f:
+                f.write(r.content)
+
+            await ImageFunctions.pencil("images/communist_avatar.png", 'images/communist_output.png')
+
+            embed = disnake.Embed(title="Communist", color=self.randomcolor())
+            embed.set_image(url="attachment://communist.png")
+            embed.set_footer(text=f"Rendered by {ctx.author}")
+            file = disnake.File("images/communist_output.png", filename="communist.png")
+            await ctx.edit_original_message('', embed=embed, file=file)
+
+        except requests.RequestException:
+            await ctx.edit_original_message('',
+                                            embed=disnake.Embed(description='Invalid image url',
+                                                                color=self.randomcolor()))
+
     @commands.slash_command()
     async def sketch(self, ctx, usr_or_img_url):
         """Sketch image without colors"""
