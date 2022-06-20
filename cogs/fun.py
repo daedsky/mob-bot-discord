@@ -43,6 +43,28 @@ class Fun(commands.Cog):
         await ctx.send(embed=embed, file=file)
 
     @commands.slash_command()
+    async def gay(self, ctx, usr_or_img_url):
+        """Gayify the user or image"""
+        await core_functions.think(ctx)
+        try:
+            img_url = await self.get_img_url(ctx, usr_or_img_url)
+            r = requests.get(img_url)
+            with open("images/gay.png", "wb") as f:
+                f.write(r.content)
+
+            await ImageFunctions.pencil("images/gay.png", 'images/gay_output.png')
+
+            embed = disnake.Embed(title="Gay", color=self.randomcolor())
+            embed.set_image(url="attachment://gay.png")
+            embed.set_footer(text=f"Rendered by {ctx.author}")
+            file = disnake.File("images/gay_output.png", filename="gay.png")
+            await ctx.edit_original_message('', embed=embed, file=file)
+
+        except requests.RequestException:
+            await ctx.edit_original_message('',
+                                            embed=disnake.Embed(description='Invalid image url',
+                                                                color=self.randomcolor()))
+    @commands.slash_command()
     async def sketch(self, ctx, usr_or_img_url):
         """Sketch image without colors"""
         await core_functions.think(ctx)
