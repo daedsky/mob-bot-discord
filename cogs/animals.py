@@ -10,21 +10,25 @@ class Animals(commands.Cog):
     @commands.slash_command()
     async def fox(self, ctx, amount: int = 1):
         """Get some fox images"""
+        await core_functions.think(ctx)
         await core_functions.send_praw_posts(ctx, 'fox', amount)
 
     @commands.slash_command()
     async def dogs(self, ctx, amount: int = 1):
         """Get some dog pictures"""
+        await core_functions.think(ctx)
         await core_functions.send_praw_posts(ctx, 'DOG+PuppySmiles', amount)
 
     @commands.slash_command()
     async def cats(self, ctx, amount: int = 1):
         """Get cat pics"""
+        await core_functions.think(ctx)
         await core_functions.send_praw_posts(ctx, 'cat+cats+catpics', amount)
 
     @commands.slash_command()
     async def cute(self, ctx, subreddit, amount: int = 1):
         """Get pics of the animal"""
+        await core_functions.think(ctx)
         is_nsfw = await core_functions.is_subreddit_nsfw(subreddit)
         if is_nsfw and not ctx.channel.is_nsfw():
             await ctx.edit_original_message('', embed=disnake.Embed(

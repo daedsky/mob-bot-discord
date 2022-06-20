@@ -203,17 +203,13 @@ class Fun(commands.Cog):
     @commands.slash_command()
     async def meme(self, ctx, amount: int = 1, subreddit='meme'):
         """Get some memes"""
-        if amount > 10:
-            await ctx.edit_original_message('', embed=disnake.Embed(description=f"Max limit is 10",
-                                                                    color=disnake.Colour.random()))
+        subreddit_is_nsfw = await core_functions.is_subreddit_nsfw(subreddit)
+        if subreddit_is_nsfw and not ctx.channel.is_nsfw():
+            await ctx.edit_original_message('', embed=disnake.Embed(
+                description="You dickhead! this is not a nsfw channel.",
+                color=self.randomcolor()))
         else:
-            subreddit_is_nsfw = await core_functions.is_subreddit_nsfw(subreddit)
-            if subreddit_is_nsfw and not ctx.channel.is_nsfw():
-                await ctx.edit_original_message('', embed=disnake.Embed(
-                    description="You dickhead! this is not a nsfw channel.",
-                    color=self.randomcolor()))
-            else:
-                await core_functions.send_praw_posts(ctx, subreddit, amount)
+            await core_functions.send_praw_posts(ctx, subreddit, amount)
 
     @commands.slash_command()
     async def details(self, ctx, user: disnake.Member):

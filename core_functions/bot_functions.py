@@ -7,7 +7,6 @@ async def think(ctx):
     await ctx.send('Mob bot is thinking...')
 
 async def send_praw_posts(ctx, subreddit: str, amount: int):
-    await think(ctx)
     if amount > 11:
         await ctx.edit_original_message('', embed=disnake.Embed(description="Max limit is 10",
                                                                 color=disnake.Colour.random()))
