@@ -4,11 +4,11 @@ import random
 
 
 async def fetch_post(subreddit: str, amount: int):
-    reddit = asyncpraw.Reddit(client_id=os.getenv('praw_client_id'),  # praw client id
-                              client_secret=os.getenv('praw_client_secret'),  # praw client secret
-                              username=os.getenv('praw_username'),  # reddit username
-                              password=os.getenv('praw_password'),  # reddit password
-                              user_agent=os.getenv('praw_user_agent'))  # write here anything
+    reddit = asyncpraw.Reddit(client_id=os.getenv('PRAW_CLIENT_ID'),  # praw client id
+                              client_secret=os.getenv('PRAW_CLIENT_SECRETt'),  # praw client secret
+                              username=os.getenv('PRAW_USERNAME'),  # reddit username
+                              password=os.getenv('PRAW_PASSWORD'),  # reddit password
+                              user_agent=os.getenv('PRAW_USER_AGENT'))  # write here anything
 
     posts = dict()
     subreddit = await reddit.subreddit(subreddit)
