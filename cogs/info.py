@@ -23,7 +23,8 @@ class Info(commands.Cog):
         owner_id = str(ctx.guild.owner_id)
         owner = f"<@{owner_id}>"
         creation_date = str(ctx.guild.created_at)[:10]
-        icon = str(ctx.guild.icon.url)
+        icon = None
+        if ctx.guild.icon: icon = str(ctx.guild.icon.url)
         v_lvl = ctx.guild.verification_level
         boosts = ctx.guild.premium_subscription_count
         large = str(ctx.guild.large)

@@ -7,20 +7,13 @@ class Owner(commands.Cog):
         self.bot = bot
 
     @commands.is_owner()
-    @commands.slash_command(guild_ids=[840468981551071232])
+    @commands.slash_command(guild_ids=[765870385979195412])
     async def logout(self, ctx):
         await ctx.send(embed=disnake.Embed(description="Logged out! Now I'm offline."))
         await self.bot.close()
 
     @commands.is_owner()
-    @commands.slash_command(guild_ids=[840468981551071232])
-    async def botguilds(self, ctx):
-        guilds = self.bot.guilds
-        Guilds = [f"{x.name} | id: {x.id}" for x in guilds]
-        await ctx.send(Guilds)
-
-    @commands.is_owner()
-    @commands.slash_command(guild_ids=[840468981551071232])
+    @commands.slash_command(guild_ids=[765870385979195412])
     async def change_status(self, ctx: disnake.ApplicationCommandInteraction, mode=None, *, desc=None):
         guilds = self.bot.guilds
         if not desc:

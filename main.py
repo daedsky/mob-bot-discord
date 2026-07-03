@@ -1,6 +1,9 @@
 import os
 import disnake
 from disnake.ext import commands
+from dotenv import load_dotenv
+
+load_dotenv('.env', verbose=True)
 
 bot = commands.InteractionBot(sync_commands_debug=True)
 

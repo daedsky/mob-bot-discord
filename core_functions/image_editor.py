@@ -8,7 +8,9 @@ class Utility:
     def get_text_size(text, font: ImageFont.FreeTypeFont):
         img = Image.new('L', (1, 1))
         draw = ImageDraw.Draw(img)
-        w, h = draw.textsize(text, font=font)
+        bbox = draw.textbbox(xy=(0,0), text=text, font=font)
+        w = bbox[2] - bbox[0]
+        h = bbox[3] - bbox[1]
         return w, h
 
     @staticmethod

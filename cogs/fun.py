@@ -39,7 +39,7 @@ class Fun(commands.Cog):
         embed = disnake.Embed(title='Facts', color=self.randomcolor())
         embed.set_image('attachment://fact.png')
         embed.set_footer(text=f"Rendered by {ctx.author}")
-        file = disnake.File("images/pencil_output.png", filename="sketch.png")
+        file = disnake.File("images/fact.png", filename="fact.png")
         await ctx.send(embed=embed, file=file)
 
     @commands.slash_command()
@@ -52,7 +52,7 @@ class Fun(commands.Cog):
             with open("images/gay_avatar.png", "wb") as f:
                 f.write(r.content)
 
-            await ImageFunctions.pencil("images/gay_avatar.png", 'images/gay_output.png')
+            await ImageFunctions.gay("images/gay_avatar.png", 'images/gay_output.png')
 
             embed = disnake.Embed(title="Gay", color=self.randomcolor())
             embed.set_image(url="attachment://gay.png")
@@ -75,7 +75,7 @@ class Fun(commands.Cog):
             with open("images/communist_avatar.png", "wb") as f:
                 f.write(r.content)
 
-            await ImageFunctions.pencil("images/communist_avatar.png", 'images/communist_output.png')
+            await ImageFunctions.communist("images/communist_avatar.png", 'images/communist_output.png')
 
             embed = disnake.Embed(title="Communist", color=self.randomcolor())
             embed.set_image(url="attachment://communist.png")
@@ -120,7 +120,7 @@ class Fun(commands.Cog):
             with open("images/joh_avatar.png", "wb") as f:
                 f.write(r.content)
 
-            await ImageFunctions.pencil("images/joh_avatar.png", 'images/joh_output.png')
+            await ImageFunctions.joke_over_head("images/joh_avatar.png", 'images/joh_output.png')
 
             embed = disnake.Embed(title="Joke over head", color=self.randomcolor())
             embed.set_image(url="attachment://joh.png")
@@ -143,7 +143,7 @@ class Fun(commands.Cog):
             with open("images/grave_avatar.png", "wb") as f:
                 f.write(r.content)
 
-            await ImageFunctions.pencil("images/grave_avatar.png", 'images/grave_output.png')
+            await ImageFunctions.grave("images/grave_avatar.png", 'images/grave_output.png')
 
             embed = disnake.Embed(title="RIP", color=self.randomcolor())
             embed.set_image(url="attachment://grave.png")
@@ -381,39 +381,10 @@ class Fun(commands.Cog):
         await ctx.edit_original_message(user.mention, embed=em)
 
     @commands.slash_command()
-    async def write(self, ctx, *, text):
-        """Handwriting with your text"""
-        await core_functions.think(ctx)
-        rgb = (0, 0, 138)
-        data = requests.get(
-            f"https://pywhatkit.herokuapp.com/handwriting?text={text}&rgb={rgb[0]},{rgb[1]},{rgb[2]}").content
-
-        with open('images/text_to_handwriting.png', "wb") as f:
-            f.write(data)
-
-        file = disnake.File('images/text_to_handwriting.png')
-        await ctx.edit_original_message('', file=file)
-
-    @commands.slash_command()
     async def echo(self, ctx, *, text):
         """Echos your text"""
         await core_functions.think(ctx)
         await ctx.edit_original_message(text)
-
-    @commands.slash_command()
-    async def pokemon(self, ctx, pokemon_name):
-        """Get the image of a pokemon"""
-        await core_functions.think(ctx)
-        name = f"pokemon {pokemon_name}"
-        url = f"https://i.some-random-api.ml/pokemon/{pokemon_name}.png"
-        if requests.get(url).status_code == 200:
-            em = disnake.Embed(title=name, color=disnake.colour.Colour.random())
-            em.set_image(url=url)
-            em.set_footer(text=f"Requested by {ctx.author.name}")
-            await ctx.edit_original_message('', embed=em)
-        else:
-            await ctx.edit_original_message('', embed=disnake.Embed(
-                description='This pokemon does not exists or check your spelling.'))
 
 
 def setup(bot):

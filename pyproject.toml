@@ -1,0 +1,8 @@
+[project]
+name = "mob-bot-discord"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "disnake", "python-dotenv", "requests", "qrcode",
+    "opencv-python", "numpy", "pillow", "asyncpraw"
+]

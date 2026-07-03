@@ -7,3 +7,4 @@ __pycache__
 cogs/__pycache__
 core_functions/__pycache__
 .idea
+.env
