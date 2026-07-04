@@ -386,9 +386,9 @@ class Fun(commands.Cog):
         await core_functions.think(ctx)
         await ctx.edit_original_message(text)
 
-    @commands.slash_command(name="reddit")
+    @commands.slash_command(name="redit")
     async def __reddit(self, ctx, subreddit, amount: int = 1):
-        """Get reddit post from a subreddit"""
+        """Get redit post from a subreddit"""
         await core_functions.think(ctx)
         is_nsfw = await core_functions.is_subreddit_nsfw(subreddit)
         if is_nsfw and not ctx.channel.is_nsfw():

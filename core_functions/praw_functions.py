@@ -3,12 +3,16 @@ import os
 import random
 
 
+def get_reddit_instance():
+    return asyncpraw.Reddit(client_id=os.getenv('PRAW_CLIENT_ID'),  # praw client id
+                            client_secret=os.getenv('PRAW_CLIENT_SECRET'),  # praw client secret
+                            username=os.getenv('PRAW_USERNAME'),  # reddit username
+                            password=os.getenv('PRAW_PASSWORD'),  # reddit password
+                            user_agent=os.getenv('PRAW_USER_AGENT'))  # write here anything
+
+
 async def fetch_post(subreddit: str, amount: int):
-    reddit = asyncpraw.Reddit(client_id=os.getenv('PRAW_CLIENT_ID'),  # praw client id
-                              client_secret=os.getenv('PRAW_CLIENT_SECRETt'),  # praw client secret
-                              username=os.getenv('PRAW_USERNAME'),  # reddit username
-                              password=os.getenv('PRAW_PASSWORD'),  # reddit password
-                              user_agent=os.getenv('PRAW_USER_AGENT'))  # write here anything
+    reddit = get_reddit_instance()
 
     posts = dict()
     subreddit = await reddit.subreddit(subreddit)
@@ -28,11 +32,7 @@ async def fetch_post(subreddit: str, amount: int):
 
 
 async def is_subreddit_nsfw(subreddit):
-    reddit = asyncpraw.Reddit(client_id=os.getenv('praw_client_id'),  # praw client id
-                              client_secret=os.getenv('praw_client_secret'),  # praw client secret
-                              username=os.getenv('praw_username'),  # reddit username
-                              password=os.getenv('praw_password'),  # reddit password
-                              user_agent=os.getenv('praw_user_agent'))  # write here anything
+    reddit = get_reddit_instance()
 
     subreddit = await reddit.subreddit(subreddit)
     await subreddit.load()
