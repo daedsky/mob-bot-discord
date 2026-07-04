@@ -38,5 +38,5 @@ class Animals(commands.Cog):
             await core_functions.send_praw_posts(ctx, subreddit, amount)
 
 
-def setup(bot):
-    bot.add_cog(Animals(bot))
+# def setup(bot):
+#     bot.add_cog(Animals(bot))

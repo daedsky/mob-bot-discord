@@ -10,6 +10,7 @@ bot = commands.InteractionBot(sync_commands_debug=True)
 bot.invite_url = 'https://discord.com/api/oauth2/authorize?client_id=774679887101427713&permissions=8&scope=bot'
 bot.server_url = 'https://discord.gg/UPtQtvk'
 
+
 @bot.event
 async def on_ready():
     print(f'{bot.user} is online.')
@@ -19,40 +20,13 @@ async def on_ready():
     print(bot.owner)
 
 
-@commands.is_owner()
-@commands.slash_command(guild_ids=[840468981551071232])
-async def load(ctx: disnake.ApplicationCommandInteraction, extension):
-    bot.load_extension(f'cogs.{extension}')
-    await ctx.author.send(f'successfully loaded {extension}')
-
-
-@commands.is_owner()
-@bot.slash_command(guild_ids=[840468981551071232])
-async def unload(ctx, extension):
-    bot.unload_extension(f"cogs.{extension}")
-    await ctx.author.send(f"successfully unloaded {extension}")
-
-
-@commands.is_owner()
-@bot.slash_command(guild_ids=[840468981551071232])
-async def reload(ctx, extension):
-    bot.reload_extension(f"cogs.{extension}")
-    await ctx.author.send(f"successfully reloaded {extension}")
-
-
-@commands.is_owner()
-@bot.slash_command(guild_ids=[840468981551071232])
-async def reload_all_cogs(ctx):
-    for file in os.listdir("cogs"):
-        if file.endswith(".py"):
-            bot.reload_extension(f"cogs.{file[:-3]}")
-    ctx.author.send("All cogs reload successfully.")
-
-
 def load_the_cogs():
     for file in os.listdir("cogs"):
         if file.endswith(".py"):
-            bot.load_extension(f"cogs.{file[:-3]}")
+            try:
+                bot.load_extension(f"cogs.{file[:-3]}")
+            except disnake.ext.commands.errors.NoEntryPointError as e:
+                print(e)
 
 
 load_the_cogs()

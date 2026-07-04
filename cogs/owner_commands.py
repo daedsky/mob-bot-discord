@@ -1,5 +1,6 @@
 import disnake
 from disnake.ext import commands
+import os
 
 
 class Owner(commands.Cog):
@@ -36,6 +37,32 @@ class Owner(commands.Cog):
         elif mode == 'offline':
             await self.bot.change_presence(activity=disnake.Game(desc), status=disnake.Status.offline)
             await ctx.author.send('changed presence successfully')
+
+    @commands.is_owner()
+    @commands.slash_command(guild_ids=[765870385979195412])
+    async def load(self, ctx: disnake.ApplicationCommandInteraction, extension):
+        self.bot.load_extension(f'cogs.{extension}')
+        await ctx.author.send(f'successfully loaded {extension}')
+
+    @commands.is_owner()
+    @commands.slash_command(guild_ids=[765870385979195412])
+    async def unload(self, ctx, extension):
+        self.bot.unload_extension(f"cogs.{extension}")
+        await ctx.author.send(f"successfully unloaded {extension}")
+
+    @commands.is_owner()
+    @commands.slash_command(guild_ids=[765870385979195412])
+    async def reload(self, ctx, extension):
+        self.bot.reload_extension(f"cogs.{extension}")
+        await ctx.author.send(f"successfully reloaded {extension}")
+
+    @commands.is_owner()
+    @commands.slash_command(guild_ids=[765870385979195412])
+    async def reload_all_cogs(self, ctx):
+        for file in os.listdir("cogs"):
+            if file.endswith(".py"):
+                self.bot.reload_extension(f"cogs.{file[:-3]}")
+        ctx.author.send("All cogs reload successfully.")
 
 
 def setup(bot):

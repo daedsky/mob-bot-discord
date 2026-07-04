@@ -386,6 +386,18 @@ class Fun(commands.Cog):
         await core_functions.think(ctx)
         await ctx.edit_original_message(text)
 
+    @commands.slash_command(name="reddit")
+    async def __reddit(self, ctx, subreddit, amount: int = 1):
+        """Get reddit post from a subreddit"""
+        await core_functions.think(ctx)
+        is_nsfw = await core_functions.is_subreddit_nsfw(subreddit)
+        if is_nsfw and not ctx.channel.is_nsfw():
+            await ctx.edit_original_message('', embed=disnake.Embed(
+                description="You dickhead! this is not a nsfw channel.",
+                color=disnake.Colour.random()))
+        else:
+            await core_functions.send_praw_posts(ctx, subreddit, amount)
+
 
 def setup(bot):
     bot.add_cog(Fun(bot))
